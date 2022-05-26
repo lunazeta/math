@@ -53,9 +53,12 @@ class Function():
     #Takes x and subs it into the function
     def sub(self, x: float):
         decomposition = self.decomposition
-        
-        newLookingAt = decomposition
-        lookingAt = decomposition
+
+        lookingAt = []
+        newLookingAt = []
+        for i in decomposition:
+            lookingAt.append(i)
+            newLookingAt.append(i)
 
         for part in lookingAt:
             if part == "x":
@@ -67,8 +70,6 @@ class Function():
             
             #Defining all operators
             if isinstance(part, float):
-                #It would be nice if python actually had a switch statement
-                #UPDATE 26/05/2022: I fixed it!
                 if lookingAt[1] == "+":
                     newLookingAt[0] = part + lookingAt[2]
                     newLookingAt.pop(2)
@@ -100,6 +101,8 @@ class Function():
     def integrate(self, lowerBound: float, upperBound: float, deltaX: float = 0.01):
         x = lowerBound
         total = 0
-        while x < upperBound / deltaX:
-            total += self.sub(x)
+        while x < upperBound:
+            total += self.sub(x) * deltaX
             x += deltaX
+
+        return total  
