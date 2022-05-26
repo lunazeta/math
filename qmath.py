@@ -1,8 +1,11 @@
 class Function():
     from math import pow
+
     #Decomposes a function string by separating it into parts and return a list of those parts
     #Parts include: Any numerals in the function, any x's in the function, and any operators in the function
     def __functionDecomposition(self, f: str):
+        if not isinstance(f, str): raise TypeError(f"Expected {str(str)} for f but got type : " + str(type(f)))
+          
         parts = []
         lookingAt = ""
         previousIsNumeric = False
@@ -52,6 +55,8 @@ class Function():
 
     #Takes x and subs it into the function
     def sub(self, x: float):
+        if not isinstance(x, float): raise TypeError(f"Expected {str(float)} for x but got type : " + str(type(x)))
+        
         decomposition = self.decomposition
 
         lookingAt = []
@@ -99,6 +104,11 @@ class Function():
         return lookingAt[0]
     
     def integrate(self, lowerBound: float, upperBound: float, deltaX: float = 0.01):
+        if not isinstance(lowerBound, float): raise TypeError(f"Expected {str(float)} for lowerBound but got type : " + str(type(lowerBound)))
+        if not isinstance(upperBound, float): raise TypeError(f"Expected {str(float)} for upperBound but got type : " + str(type(upperBound)))
+        if not isinstance(deltaX, float): raise TypeError(f"Expected {str(float)} for deltaX but got type : " + str(type(deltaX)))
+
+        #Iterate over x with step size deltaX until x > upperBound
         x = lowerBound
         total = 0
         while x < upperBound:
